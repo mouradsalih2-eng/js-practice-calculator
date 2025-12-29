@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: "Courier New", Courier, monospace;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-body {
+            width: 300px;
+            padding: 20px;
+            border-radius: 20px; 
+            background-color: #1a1a1a; 
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .display {
+            width: 100%;
+            box-sizing: border-box; 
+            height: 80px;      
+            font-size: 3rem; 
+            text-align: right;
+            letter-spacing: 5px;
+            padding-right: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #333; /* Dark grey screen background */
+            color: #fff;
+            border: none;
+            outline: none;
+            font-weight: bold;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 60px; 
+            border-radius: 30px; 
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        
+        .Number {
+            background-color: #505050;
+        }
+
+        .Operator, .Equal {
+            background-color: #ff9500; 
+        }
+        
+        .Clear {
+            background-color: #cf231a;
+            border-radius: 30px; 
+            
+            grid-column: span 4; 
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        button:active {
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+   <div class="calculator-body">
+    
+    <input type="text" class="display js-display" readonly>
+
+    <div class="buttons-grid">
+        <button onclick="updateCalculation('1')" class="Number">1</button>
+        <button onclick="updateCalculation('2')" class="Number">2</button>
+        <button onclick="updateCalculation('3')" class="Number">3</button>
+        <button onclick="updateCalculation('+')" class="Operator">+</button>
+        
+        <button onclick="updateCalculation('4')" class="Number">4</button>
+        <button onclick="updateCalculation('5')" class="Number">5</button>
+        <button onclick="updateCalculation('6')" class="Number">6</button>
+        <button onclick="updateCalculation('-')" class="Operator">-</button>
+        
+        <button onclick="updateCalculation('7')" class="Number">7</button>
+        <button onclick="updateCalculation('8')" class="Number">8</button>
+        <button onclick="updateCalculation('9')" class="Number">9</button>
+        <button onclick="updateCalculation('*')" class="Operator">*</button>
+        
+        <button onclick="updateCalculation('0')" class="Number">0</button>
+        <button onclick="updateCalculation('.')" class="Number">.</button>
+        <button onclick="calculateResult()" class="Equal">=</button>
+        <button onclick="updateCalculation('/')" class="Operator">/</button>
+        
+        <button onclick="clearResult()" class="Clear">C</button>
+    </div>
+   </div>
+
+   <script>
+    let calculation = '';
+
+    function updateCalculation(value) {
+        calculation += value;
+        displayCalculation();
+    }
+       
+    function displayCalculation() {
+        // This selector now works because we added class="js-display" to the HTML
+        document.querySelector(".js-display").value = calculation;
+    }
+
+    function calculateResult() {
+        try {
+            // Note: eval() works for learning, but be careful using it in real apps!
+            calculation = eval(calculation);
+            displayCalculation();
+        } catch(error) {
+            document.querySelector('.js-display').value = 'Error';
+            calculation = '';
+        }
+    }
+
+    function clearResult() {
+        calculation = '';
+        displayCalculation();
+    }
+   </script>
+</body>
+</html>
