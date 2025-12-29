@@ -19,27 +19,24 @@
         .calculator-body {
             width: 300px;
             padding: 20px;
-            border-radius: 20px; 
-            background-color: #1a1a1a; 
+            border-radius: 20px;
+            background-color: #1a1a1a;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
         
         .display {
             width: 100%;
             box-sizing: border-box; 
-            height: 80px;      
-            font-size: 3rem; 
+            height: 80px;
+            font-size: 3rem;
             text-align: right;
-            letter-spacing: 5px;
             padding-right: 15px;
             margin-bottom: 20px;
             border-radius: 10px;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #333; /* Dark grey screen background */
+            background-color: #333;
             color: #fff;
             border: none;
             outline: none;
-            font-weight: bold;
         }
 
         .buttons-grid {
@@ -49,8 +46,8 @@
         }
 
         button {
-            height: 60px; 
-            border-radius: 30px; 
+            height: 60px;
+            border-radius: 50%; 
             font-size: 1.2rem;
             border: none;
             outline: none;
@@ -58,38 +55,32 @@
             font-weight: bold;
             transition: opacity 0.2s;
             color: white;
-            font-family: 'Courier New', Courier, monospace;
         }
 
         
-        .Number {
-            background-color: #505050;
-        }
+        .Number { background-color: #505050; }
+       
+        .Operator { background-color: #ff9500; }
 
-        .Operator, .Equal {
-            background-color: #ff9500; 
-        }
-        
+
         .Clear {
-            background-color: #cf231a;
+            background-color: #fe5249; 
+        }
+        
+        .Equal {
+            background-color: #ff9500;
             border-radius: 30px; 
-            
             grid-column: span 4; 
         }
 
-        button:hover {
-            opacity: 0.8;
-        }
-        
-        button:active {
-            opacity: 0.6;
-        }
+
+        button:hover { opacity: 0.8; }
+        button:active { opacity: 0.6; }
 
     </style>
 </head>
 <body>
    <div class="calculator-body">
-    
     <input type="text" class="display js-display" readonly>
 
     <div class="buttons-grid">
@@ -110,11 +101,9 @@
         
         <button onclick="updateCalculation('0')" class="Number">0</button>
         <button onclick="updateCalculation('.')" class="Number">.</button>
-        <button onclick="calculateResult()" class="Equal">=</button>
-        <button onclick="updateCalculation('/')" class="Operator">/</button>
+        <button onclick="clearResult()" class="Clear">C</button> <button onclick="updateCalculation('/')" class="Operator">/</button>
         
-        <button onclick="clearResult()" class="Clear">C</button>
-    </div>
+        <button onclick="calculateResult()" class="Equal">=</button> </div>
    </div>
 
    <script>
@@ -126,13 +115,11 @@
     }
        
     function displayCalculation() {
-        // This selector now works because we added class="js-display" to the HTML
         document.querySelector(".js-display").value = calculation;
     }
 
     function calculateResult() {
         try {
-            // Note: eval() works for learning, but be careful using it in real apps!
             calculation = eval(calculation);
             displayCalculation();
         } catch(error) {
